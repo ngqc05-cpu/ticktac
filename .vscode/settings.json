@@ -1,0 +1,19 @@
+{
+  "C_Cpp.intelliSenseEngine": "default",
+  "idf.extensionActivationMode": "always",
+  "clangd.path": "C:\\Espressif\\tools\\esp-clang\\esp-20.1.1_20250829\\esp-clang\\bin\\clangd.exe",
+  "clangd.arguments": [
+    "--background-index",
+    "--query-driver=**",
+    "--compile-commands-dir=c:\\esp_idf\\esp_idf\\file_code_esp\\timestamp-dang-cap\\timestamp\\ticktac\\ticktac\\build"
+  ],
+  "idf.currentSetup": "C:\\esp\\v6.0\\esp-idf",
+  "idf.openOcdConfigs": [
+    "board/esp32c5-builtin.cfg"
+  ],
+  "idf.portWin": "COM9",
+  "idf.customExtraVars": {
+    "IDF_TARGET": "esp32c5"
+  },
+  "idf.flashType": "UART"
+}

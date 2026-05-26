@@ -18,7 +18,7 @@ static csi_binary_packet_t s_packet;
 
 
 #define UART_PORT_NUM      UART_NUM_1 
-#define UART_BAUD_RATE     460800    // tốc độ truyền 
+#define UART_BAUD_RATE     115200   // tốc độ truyền 
 #define UART_TX_PIN        (6)        // Nối vào chân DI của module RS485
 #define UART_RX_PIN        (1)        // Nối vào chân RO của module RS485                                                  
 

@@ -12,8 +12,8 @@ static const char *TAG = "APP_MAIN";
 #define WIFI_PASS   "12345678"              //wifi kết nối lúc đầu để đồng bộ thời gian NTP, sau đó sẽ không cần dùng đến nữa
 
 // thay bằng MAC cần lọc           
-static const uint8_t TARGET_ASUS_MAC[6] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x66};            //  d0:cf:13:e3:6f:6d  là mac của esp32c5                 
-#define WIFI_CHANNEL_5G  36  // kênh phát   
+static const uint8_t TARGET_ASUS_MAC[6] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x66};          //  d0:cf:13:e3:6f:6d  là mac của esp32c5                 
+#define WIFI_CHANNEL_5G  157 // kênh phát   
 
 
 void app_main(void) {
@@ -22,7 +22,7 @@ void app_main(void) {
         return;
     }
 
-    csi_collector_init(TARGET_ASUS_MAC, WIFI_CHANNEL_5G);
+    csi_collector_init(TARGET_ASUS_MAC,WIFI_CHANNEL_5G);
     
     while (1) {
         vTaskDelay(pdMS_TO_TICKS(10000)); // cứ để task main ngủ yên

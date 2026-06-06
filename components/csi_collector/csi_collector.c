@@ -18,9 +18,11 @@ static csi_binary_packet_t s_packet;
 
 
 #define UART_PORT_NUM      UART_NUM_1 
-#define UART_BAUD_RATE     115200   // tốc độ truyền 
+#define UART_BAUD_RATE     460800// tốc độ truyền 
 #define UART_TX_PIN        (6)        // Nối vào chân DI của module RS485
-#define UART_RX_PIN        (1)        // Nối vào chân RO của module RS485                                                  
+#define UART_RX_PIN        (1)        // Nối vào chân RO của module RS485 
+
+#define BLINK_GPIO         (8)
 
 static QueueHandle_t s_csi_queue = NULL;
 
@@ -83,6 +85,12 @@ static void wifi_csi_cb(void *ctx, wifi_csi_info_t *info) {
     }
     s_pkt_count++;
 
+    if (s_pkt_count % 10 == 0) {
+        static uint8_t s_led_state = 0;
+        s_led_state = !s_led_state; // Đảo từ 0 sang 1, hoặc từ 1 về 0
+        gpio_set_level(BLINK_GPIO, s_led_state);
+    }
+
     uint8_t calculated_checksum = 0;
     uint8_t *ptr = (uint8_t *)&s_packet;
     for (int i = 0; i < (sizeof(csi_binary_packet_t) - 1); i++) {
@@ -111,7 +119,7 @@ void csi_collector_init(const uint8_t *filter_mac, uint8_t channel) {
     ESP_ERROR_CHECK(uart_driver_install(UART_PORT_NUM, 1024, 2048, 0, NULL, 0)); 
 
     //khởi tạo Queue & Task
-    s_csi_queue = xQueueCreate(20, sizeof(csi_binary_packet_t)); 
+    s_csi_queue = xQueueCreate(40, sizeof(csi_binary_packet_t)); 
     xTaskCreate(uart_tx_task, "uart_tx_task", 2048, NULL, 10, NULL); 
     
     s_packet.magic_bytes = 0x55AA;

@@ -71,18 +71,7 @@ static void wifi_csi_cb(void *ctx, wifi_csi_info_t *info) {
         esp_csi_gain_ctrl_get_gain_compensation(&compensate_gain, current_agc, current_fft);
     }
 
-    int8_t *raw_csi = (int8_t *)info->buf;
-    for (int i = 0; i < 128; i++) {
-        int16_t scaled_val = (int16_t)(raw_csi[i] * compensate_gain);
-
-        if (scaled_val > 127) {
-            scaled_val = 127;
-        } else if (scaled_val < -128) {
-            scaled_val = -128;
-        }
-
-        s_packet.csi_data[i] = (int8_t)scaled_val;
-    }
+    memcpy(s_packet.csi_data, info->buf, 128);
     s_pkt_count++;
 
     if (s_pkt_count % 10 == 0) {

@@ -129,7 +129,7 @@ void csi_collector_init(const uint8_t *filter_mac, uint8_t channel) {
     memset(&csi_config,0,sizeof(csi_config));
     csi_config.enable                   = true;
     csi_config.acquire_csi_legacy       = false;
-    csi_config.acquire_csi_force_lltf   = true;
+    csi_config.acquire_csi_force_lltf   = false;
     csi_config.acquire_csi_ht20         = true;
     csi_config.acquire_csi_ht40         = false;
     csi_config.acquire_csi_vht          = true;

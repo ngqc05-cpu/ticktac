@@ -13,7 +13,7 @@ static const char *TAG = "APP_MAIN";
 
 // thay bằng MAC cần lọc           
 static const uint8_t TARGET_ASUS_MAC[6] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x66};          //  d0:cf:13:e3:6f:6d  là mac của esp32c5                 
-#define WIFI_CHANNEL_5G  157 // kênh phát   
+#define WIFI_CHANNEL_5G  100 // kênh phát   
 
 
 void app_main(void) {

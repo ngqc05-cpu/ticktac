@@ -1,0 +1,27 @@
+├── CMakeLists.txt                      # File cấu hình build chính của toàn bộ Project
+├── sdkconfig                           # File tự động sinh chứa toàn bộ cấu hình phần cứng (Baudrate, Wi-Fi...)
+├── partitions.csv                      # Bảng phân vùng bộ nhớ Flash (Chia đất cho App, NVS, Storage)
+│
+├── main/                               # THƯ MỤC LÕI CHẠY CHƯƠNG TRÌNH
+│   ├── CMakeLists.txt                  # Khai báo các file .c trong thư mục main và liên kết component
+│   └── main.c                          # Điểm khởi đầu của hệ thống (chứa hàm app_main)
+│
+└── components/                         # THƯ MỤC CHỨA CÁC THÀNH PHẦN MODULAR TỰ PHÁT TRIỂN
+    │
+    ├── nvs_component/                  # Component quản lý bộ nhớ dài hạn
+    │   ├── CMakeLists.txt              # Cấu hình biên dịch riêng cho NVS
+    │   ├── include/
+    │   │   └── nvs_component.h         # Khai báo hàm init, đọc/ghi cấu hình
+    │   └── nvs_component.c             # Hiện thực hóa logic khởi tạo NVS Flash
+    │
+    ├── csi_collector/                  # Component lõi trích xuất Wi-Fi CSI & Đẩy UART
+    │   ├── CMakeLists.txt              # Đăng ký mã nguồn và liên kết thư viện (driver, esp_wifi)
+    │   ├── include/
+    │   │   └── csi_collector.h         # Khai báo cấu trúc gói tin nhị phân 155/161 bytes, hàm init
+    │   └── csi_collector.c             # Hiện thực Callback Promiscuous, xQueue, Task đẩy UART/RS485
+    │
+    └── ntp_component/                  # Component đồng bộ thời gian thực mạng (Nếu có dùng)
+        ├── CMakeLists.txt
+        ├── include/
+        │   └── ntp_component.h         # Khai báo hàm lấy Timestamp hệ thống dạng Micro-giây (us)
+        └── ntp_component.c             # Cấu hình lấy thời gian chính xác để đóng gói vào gói tin CSI

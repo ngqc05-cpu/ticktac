@@ -20,7 +20,7 @@
     │   │   └── csi_collector.h         # Khai báo cấu trúc gói tin nhị phân 155/161 bytes, hàm init
     │   └── csi_collector.c             # Hiện thực Callback Promiscuous, xQueue, Task đẩy UART/RS485
     │
-    └── ntp_component/                  # Component đồng bộ thời gian thực mạng (Nếu có dùng)
+    └── ntp_component/                  # Component đồng bộ thời gian thực mạng (Phát wifi được chỉ định ở thời điểm đầu xong có thể tát sau đó)
         ├── CMakeLists.txt
         ├── include/
         │   └── ntp_component.h         # Khai báo hàm lấy Timestamp hệ thống dạng Micro-giây (us)
